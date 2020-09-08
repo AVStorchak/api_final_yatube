@@ -52,10 +52,7 @@ class FollowViewSet(ViewSetMixin, ListCreateAPIView):
 
     def perform_create(self, serializer):
         author_name = self.request.POST.get('following')
-        try:
-            author = User.objects.exclude(id=self.request.user.id).get(
-                username=author_name
-            )
-        except User.DoesNotExist:
-            raise PermissionDenied('Подписка не разрешена')
-        serializer.save(user=self.request.user, following=author)
+        author = User.objects.exclude(id=self.request.user.id).get(
+                 username=author_name
+        )
+        serializer.save(user=self.request.user)

@@ -34,3 +34,4 @@ class Follow(models.Model):
                              related_name="follower", null=True)
     following = models.ForeignKey(User, on_delete=models.CASCADE,
                                   related_name="following", null=True)
+    unique_together = (("user", "following"),)
